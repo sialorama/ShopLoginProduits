@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'com'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.10.0'
+}
+
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    //implementation pour JSTL
+    implementation 'javax.servlet:jstl:1.2'
+
+    implementation 'org.hibernate:hibernate-core:6.2.6.Final'
+    implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+    implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+    implementation 'mysql:mysql-connector-java:8.0.33'
+
+    // Add other necessary dependencies
+    compileOnly('jakarta.platform:jakarta.jakartaee-web-api:10.0.0')
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+}
+
+test {
+    useJUnitPlatform()
+}
