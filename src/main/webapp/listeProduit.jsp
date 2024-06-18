@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.demo.model.Produit" %>
+<%@ page import="com.shoploginproduits.model.Produit" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
@@ -44,7 +44,7 @@
     <%
         // Vérifier si l'utilisateur est un admin
         if (session.getAttribute("user") != null) {
-            com.demo.model.User user = (com.demo.model.User) session.getAttribute("user");
+            com.shoploginproduits.model.User user = (com.shoploginproduits.model.User) session.getAttribute("user");
             if ("admin".equals(user.getRole())) {
     %>
     <a href="ajouterProduit.jsp" class="btn btn-primary mt-4">Ajouter un Produit</a>

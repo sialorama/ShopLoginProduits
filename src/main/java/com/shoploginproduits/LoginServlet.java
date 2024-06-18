@@ -1,6 +1,6 @@
-package com.demo;
+package com.shoploginproduits;
 
-import com.demo.model.User;
+import com.shoploginproduits.model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

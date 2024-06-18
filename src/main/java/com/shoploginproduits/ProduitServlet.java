@@ -1,8 +1,8 @@
-package com.demo;
+package com.shoploginproduits;
 
 
-import com.demo.dao.ProduitDAO;
-import com.demo.model.Produit;
+import com.shoploginproduits.dao.ProduitDAO;
+import com.shoploginproduits.model.Produit;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.WebServlet;
@@ -35,7 +35,7 @@ public class ProduitServlet extends HttpServlet {
         produit.setPhoto(photo);
         produit.setPrice(price);
 
-        produitDAO.saveProduit(produit);
+        produitDAO.addOrUpdateProduit(produit);
         response.sendRedirect("produits");
     }
 }

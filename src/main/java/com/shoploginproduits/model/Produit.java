@@ -1,15 +1,28 @@
-package com.demo.model;
+package com.shoploginproduits.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "produit")
 public class Produit {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+    @Column(name = "name", nullable = false, length = 100)
     private String name;
+    @Column(name = "description", length = 500)
     private String description;
+    @Column(name = "photo", length = 200)
     private String photo;
+    @Column(name = "price", nullable = false)
     private double price;
 
+    // Default constructor is required by Hibernate
     public Produit() {}
 
-    // Constructeur avec tous les champs
+    // Constructor with all fields including id
     public Produit(int id, String name, String description, String photo, double price) {
         this.id = id;
         this.name = name;
@@ -18,7 +31,7 @@ public class Produit {
         this.price = price;
     }
 
-    // Constructeur avec tous les champs
+    // Constructor without id (useful for new entities)
     public Produit(String name, String description, String photo, double price) {
         this.name = name;
         this.description = description;
@@ -26,7 +39,7 @@ public class Produit {
         this.price = price;
     }
 
-    // Getters et Setters
+    // Getters and Setters
     public int getId() {
         return id;
     }

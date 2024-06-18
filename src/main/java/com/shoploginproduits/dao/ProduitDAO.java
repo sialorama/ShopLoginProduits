@@ -1,18 +1,20 @@
-package com.demo.dao;
+package com.shoploginproduits.dao;
 
-import com.demo.HibernateUtil;
-import com.demo.model.Produit;
+import com.shoploginproduits.HibernateUtil;
+import com.shoploginproduits.model.Produit;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
 import java.util.List;
 
 public class ProduitDAO {
 
     public ProduitDAO() {
-        // Constructor can be empty if we're using HibernateUtil for session management
+        // Default constructor
     }
 
-    public void addProduit(Produit produit) {
+    public void addOrUpdateProduit(Produit produit) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -22,7 +24,7 @@ public class ProduitDAO {
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            logError(e);
         }
     }
 
@@ -30,31 +32,24 @@ public class ProduitDAO {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.get(Produit.class, id);
         } catch (Exception e) {
-            e.printStackTrace();
+            logError(e);
             return null;
         }
     }
+
+/*    public List getProduits() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query<Produit> query =   session.createQuery("from Produit", Produit.class);
+        List<Produit> produits = query.getResultList();
+        return (produits);
+    }*/
 
     public List<Produit> getAllProduits() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("from Produit", Produit.class).list();
         } catch (Exception e) {
-            e.printStackTrace();
+            logError(e);
             return null;
-        }
-    }
-
-    public void saveProduit(Produit produit) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            session.save(produit);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
         }
     }
 
@@ -66,12 +61,20 @@ public class ProduitDAO {
             if (produit != null) {
                 session.delete(produit);
                 transaction.commit();
+            } else {
+                System.out.println("Produit not found with ID: " + id);
             }
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            logError(e);
         }
+    }
+
+    private void logError(Exception e) {
+        // Use a logging framework in production code. Here, we're using System.err for simplicity.
+        System.err.println("An error occurred: " + e.getMessage());
+        e.printStackTrace(System.err);
     }
 }
