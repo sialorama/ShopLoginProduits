@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user); // Store user object in session
-            response.sendRedirect("produits.jsp"); // Redirect to main page after successful login
+            response.sendRedirect("listProduits.jsp"); // Redirect to main page after successful login
         } else {
             response.sendRedirect("err.jsp");
         }
