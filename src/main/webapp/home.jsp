@@ -17,6 +17,6 @@
 
 <!-- Insérez ici le contenu du panel d'administration -->
 
-<p><a href="logout">Se déconnecter</a></p>
+<p><a href="logoutServlet">Se déconnecter</a></p>
 </body>
 </html>

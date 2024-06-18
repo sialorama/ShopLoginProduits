@@ -33,9 +33,11 @@ public class LoginServlet extends HttpServlet {
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user); // Store user object in session
-            response.sendRedirect("listProduits.jsp"); // Redirect to products page after successful login
+            response.sendRedirect("home.jsp"); // Redirect to products page after successful login
+
         } else {
             response.sendRedirect("err.jsp");
+            System.out.println("JE N'ai PAS PU récupérer les id de la DB !");
         }
     }
 
@@ -45,7 +47,9 @@ public class LoginServlet extends HttpServlet {
             Query<User> query = session.createQuery(hql, User.class);
             query.setParameter("email", email);
             query.setParameter("password", password);
+            System.out.println("J'ai récupéré les id de la DB !");
             return query.uniqueResult();
+
         } catch (Exception e) {
             e.printStackTrace();
             return null;
