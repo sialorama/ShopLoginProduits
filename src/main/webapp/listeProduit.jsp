@@ -11,7 +11,7 @@
 <body>
 <div class="container">
     <h1 class="my-4">Liste des Produits</h1>
-    <ul class="listeProduits">
+    <ul class="ProduitServlet">
         <%
             // Récupérer la liste des produits depuis l'objet de requête
             List<Produit> produits = (List<Produit>) request.getAttribute("produits");
@@ -47,7 +47,7 @@
             com.shoploginproduits.model.User user = (com.shoploginproduits.model.User) session.getAttribute("user");
             if ("admin".equals(user.getRole())) {
     %>
-    <a href="ajouterProduit.jsp" class="btn btn-primary mt-4">Ajouter un Produit</a>
+    <a href="admin/admin.jsp" class="btn btn-primary mt-4">Ajouter un Produit</a>
     <%
             }
         }
